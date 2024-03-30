@@ -142,8 +142,10 @@ def order_book(orders, book, stock_name):
 # Test Data Persistence
 
 def generate_csv():
-    """ Generate a CSV of order history. """
-    with open('test.csv', 'wb') as f:
+    """ Generate a CSV of order history in the same directory as the script. """
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    csv_file_path = os.path.join(current_dir, 'test.csv')
+    with open(csv_file_path, 'w') as f:
         writer = csv.writer(f)
         for t, stock, side, order, size in orders(market()):
             if t > MARKET_OPEN + SIM_LENGTH:
